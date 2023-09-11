@@ -1,0 +1,9 @@
+
+{	java:S115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(„ó£øÿÿÿÿ8š´÷§1
+v
+java:S3008
+"YRename this field "PIM_NAV_OPTION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ò¹ß¤8š´÷§1
+Z
+java:S1611"8Remove the parentheses around the "pimPageNav" parameter(°å™êúÿÿÿÿ8”š´÷§1
+j
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(°å™êúÿÿÿÿ8–š´÷§1
