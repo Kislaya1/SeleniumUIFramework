@@ -1,5 +1,6 @@
 package com.auto.selenium.ui.driver;
 
+
 import com.auto.selenium.ui.element.IWebElement;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -7,9 +8,9 @@ import org.openqa.selenium.By;
 public interface IDriver {
   void start(final String browser);
 
-  IWebElement findElement(By locator);
+  IWebElement searchElement(By by);
 
-  List<IWebElement> findElements(By locator);
+  List<IWebElement> searchElements(By by);
 
   void quit();
 }

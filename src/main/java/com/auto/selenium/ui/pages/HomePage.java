@@ -1,5 +1,7 @@
 package com.auto.selenium.ui.pages;
 
+import static com.auto.selenium.ui.enums.LeftMenuOptions.PIM;
+
 import com.auto.selenium.ui.driver.IDriver;
 import com.auto.selenium.ui.pages.components.LeftMenuComponent;
 import org.openqa.selenium.By;
@@ -10,12 +12,13 @@ public class HomePage {
   private final IDriver driver;
 
   public HomePage(final IDriver driver) {
-    this.leftMenuComponent = new LeftMenuComponent();
+    this.leftMenuComponent = new LeftMenuComponent(driver);
     this.driver = driver;
   }
 
   public PIMPage navigateToPimPage() {
-    driver.findElement(PROFILE_ICON).shouldBeDisplayed();
+    driver.searchElement(PROFILE_ICON).shouldBeVisible();
+    leftMenuComponent.selectAMenuFromLeftMenuBar(PIM);
     return new PIMPage(driver);
   }
 }

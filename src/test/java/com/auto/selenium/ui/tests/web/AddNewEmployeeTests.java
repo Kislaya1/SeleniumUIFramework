@@ -8,10 +8,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 class AddNewEmployeeTests extends WebTestSetup {
-
   @ParameterizedTest
   @ArgumentsSource(EmployeeTestData.class)
-  void addNewEmployee(final EmployeeDetails employeeDetails) {
-    LoginPage.getInstance(driver).loginToApplication();
+  void addNewEmployee(final EmployeeDetails employeeDetails) throws InterruptedException {
+    LoginPage.getInstance()
+        .loginToApplication()
+        .navigateToPimPage()
+        .addNewEmployee(employeeDetails)
+        .verifyEmployeeSuccessfullyCreated();
   }
 }

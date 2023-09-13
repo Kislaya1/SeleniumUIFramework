@@ -8,15 +8,15 @@ public class DriverManager {
 
   private DriverManager() {}
 
-  static WebDriver getDriver() {
+  public static WebDriver getDriver() {
     return driverThreadLocal.get();
   }
 
-  static void setDriver(WebDriver webDriver) {
+  public static void setDriver(WebDriver webDriver) {
     if (Objects.nonNull(webDriver)) driverThreadLocal.set(webDriver);
   }
 
-  static void unload() {
+  public static void unload() {
     driverThreadLocal.remove();
   }
 }

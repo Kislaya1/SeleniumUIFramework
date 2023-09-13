@@ -1,5 +1,7 @@
 package com.auto.selenium.ui.driver;
 
+import static com.auto.selenium.ui.driver.DriverManager.*;
+
 import com.auto.selenium.ui.config.IEnvConfig;
 import com.auto.selenium.ui.element.IWebElement;
 import com.auto.selenium.ui.element.WebCoreElement;
@@ -19,58 +21,57 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebCoreDriver implements IDriver {
   private final IEnvConfig config = ConfigFactory.create(IEnvConfig.class);
-  private WebDriverWait webDriverWait;
-
-  public WebCoreDriver() {}
-
   @Override
   public void start(final String browser) {
-    if (Objects.isNull(DriverManager.getDriver())) {
+    if (Objects.isNull(getDriver())) {
       switch (browser.toLowerCase()) {
         case "chrome":
           WebDriverManager.chromedriver().setup();
-          DriverManager.setDriver(new ChromeDriver());
+          setDriver(new ChromeDriver());
           break;
         case "firefox":
           WebDriverManager.firefoxdriver().setup();
-          DriverManager.setDriver(new FirefoxDriver());
+          setDriver(new FirefoxDriver());
           break;
         case "edge":
           WebDriverManager.edgedriver().setup();
-          DriverManager.setDriver(new EdgeDriver());
+          setDriver(new EdgeDriver());
           break;
+        default:
+          throw new IllegalArgumentException("Browser " + browser.toLowerCase() + " is not valid");
       }
+      getDriver().manage().window().maximize();
+      getDriver().navigate().to(config.webUrl());
     }
-    webDriverWait =
-        new WebDriverWait(
-            DriverManager.getDriver(), Duration.ofMillis(Long.parseLong(config.waitTime())));
-    DriverManager.getDriver().manage().window().maximize();
-    DriverManager.getDriver().navigate().to(config.webUrl());
   }
 
   @Override
-  public IWebElement findElement(By locator) {
-    WebElement nativeWebElement =
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
-    return new WebCoreElement(DriverManager.getDriver(), nativeWebElement, locator);
+  public IWebElement searchElement(By by) {
+    waitTillElementPresentIsPresent(by);
+    WebElement webElement = getDriver().findElement(by);
+    return new WebCoreElement(webElement, getDriver());
   }
 
   @Override
-  public List<IWebElement> findElements(By locator) {
-    List<WebElement> webElementList =
-        webDriverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+  public List<IWebElement> searchElements(By by) {
+    waitTillElementPresentIsPresent(by);
+    List<WebElement> webElementList = getDriver().findElements(by);
     return webElementList.stream()
-        .map(
-            nativeWebElement ->
-                new WebCoreElement(DriverManager.getDriver(), nativeWebElement, locator))
+        .map(element -> new WebCoreElement(element, getDriver()))
         .collect(Collectors.toList());
   }
 
   @Override
   public void quit() {
-    if (Objects.nonNull(DriverManager.getDriver())) {
-      DriverManager.getDriver().quit();
-      DriverManager.unload();
+    if (Objects.nonNull(getDriver())) {
+      getDriver().quit();
+      unload();
     }
+  }
+
+  private void waitTillElementPresentIsPresent(By by) {
+    WebDriverWait wait =
+        new WebDriverWait(getDriver(), Duration.ofMillis(Integer.parseInt(config.waitTime())));
+    wait.until(ExpectedConditions.refreshed(ExpectedConditions.presenceOfElementLocated(by)));
   }
 }
