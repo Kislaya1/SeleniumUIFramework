@@ -8,4 +8,5 @@ public class EmployeeDetails {
     private String middleName;
     private String lastName;
     private int employeeId;
+    private CreateLoginDetails createLoginDetails;
 }

@@ -1,4 +1,4 @@
-package com.auto.selenium.ui.enums;
+package com.auto.selenium.ui.enums.pim;
 
 public enum LeftMenuOptions {
     PIM("PIM"),

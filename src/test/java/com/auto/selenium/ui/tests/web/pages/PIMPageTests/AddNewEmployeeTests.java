@@ -1,4 +1,4 @@
-package com.auto.selenium.ui.tests.web;
+package com.auto.selenium.ui.tests.web.pages.PIMPageTests;
 
 import com.auto.selenium.ui.entity.EmployeeDetails;
 import com.auto.selenium.ui.pages.LoginPage;
@@ -10,7 +10,8 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 class AddNewEmployeeTests extends WebTestSetup {
   @ParameterizedTest
   @ArgumentsSource(EmployeeTestData.class)
-  void addNewEmployee(final EmployeeDetails employeeDetails) throws InterruptedException {
+  void addNewEmployee(final EmployeeDetails employeeDetails) {
+    System.out.println("Employee Details : " + employeeDetails);
     LoginPage.getInstance()
         .loginToApplication()
         .navigateToPimPage()

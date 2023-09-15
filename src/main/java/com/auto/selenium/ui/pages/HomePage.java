@@ -1,6 +1,6 @@
 package com.auto.selenium.ui.pages;
 
-import static com.auto.selenium.ui.enums.LeftMenuOptions.PIM;
+import static com.auto.selenium.ui.enums.pim.LeftMenuOptions.PIM;
 
 import com.auto.selenium.ui.driver.IDriver;
 import com.auto.selenium.ui.pages.components.LeftMenuComponent;

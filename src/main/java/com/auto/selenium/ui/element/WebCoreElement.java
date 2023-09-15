@@ -3,7 +3,9 @@ package com.auto.selenium.ui.element;
 import static org.assertj.core.api.Assertions.*;
 
 import com.auto.selenium.ui.config.IEnvConfig;
-import com.auto.selenium.ui.enums.ExecutionOptions;
+import com.auto.selenium.ui.enums.common.ExecutionOptions;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,20 +26,9 @@ public class WebCoreElement implements IWebElement {
   }
 
   @Override
-  public void typeText(final ExecutionOptions executionOptions, final String userData) {
-    switch (executionOptions) {
-      case NORMAL:
-        webElement.clear();
-        webElement.sendKeys(userData);
-        break;
-      case USING_JS:
-        JavascriptExecutor js = ((JavascriptExecutor) webDriver);
-        js.executeScript("arguments[0].value='" + userData + "';", webElement);
-        break;
-      default:
-        throw new IllegalArgumentException(
-            "Execution Option" + executionOptions.name() + " is not present.");
-    }
+  public void typeText(final String userData) {
+    webElement.clear();
+    webElement.sendKeys(userData);
   }
 
   @Override
@@ -62,8 +53,11 @@ public class WebCoreElement implements IWebElement {
   }
 
   @Override
-  public void uploadImage(final String filePath) {
-    webElement.sendKeys(filePath);
+  public void uploadImage(final String fileName) {
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    String absoluteDirectory = resourceDirectory.toFile().getAbsolutePath();
+    System.out.println("File Path : " + (absoluteDirectory + fileName));
+    webElement.sendKeys(absoluteDirectory + fileName);
   }
 
   @Override
@@ -71,9 +65,9 @@ public class WebCoreElement implements IWebElement {
     assertThat(webElement.isDisplayed()).as("WebElement is not displayed").isTrue();
   }
 
-  private WebElement waitForElementToBeClickable() {
+  private void waitForElementToBeClickable() {
     WebDriverWait wait =
         new WebDriverWait(webDriver, Duration.ofMillis(Integer.parseInt(config.waitTime())));
-    return wait.until(ExpectedConditions.elementToBeClickable(webElement));
+    wait.until(ExpectedConditions.elementToBeClickable(webElement));
   }
 }

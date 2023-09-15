@@ -1,6 +1,6 @@
 package com.auto.selenium.ui.pages;
 
-import static com.auto.selenium.ui.enums.ExecutionOptions.NORMAL;
+import static com.auto.selenium.ui.enums.common.ExecutionOptions.NORMAL;
 
 import com.auto.selenium.ui.config.IEnvConfig;
 import com.auto.selenium.ui.driver.IDriver;
@@ -27,8 +27,8 @@ public class LoginPage {
   }
 
   public HomePage loginToApplication() {
-    driver.searchElement(USERNAME).typeText(NORMAL, config.username());
-    driver.searchElement(PASSWORD).typeText(NORMAL, config.password());
+    driver.searchElement(USERNAME).typeText(config.username());
+    driver.searchElement(PASSWORD).typeText(config.password());
     driver.searchElement(LOGIN_BUTTON).click(NORMAL);
     return new HomePage(driver);
   }

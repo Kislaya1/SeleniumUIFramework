@@ -1,9 +1,9 @@
 package com.auto.selenium.ui.pages.components;
 
-import static com.auto.selenium.ui.enums.ExecutionOptions.NORMAL;
+import static com.auto.selenium.ui.enums.common.ExecutionOptions.NORMAL;
 
 import com.auto.selenium.ui.driver.IDriver;
-import com.auto.selenium.ui.enums.LeftMenuOptions;
+import com.auto.selenium.ui.enums.pim.LeftMenuOptions;
 import java.util.function.Function;
 import org.openqa.selenium.By;
 
