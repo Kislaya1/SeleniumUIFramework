@@ -38,7 +38,7 @@ public class PIMPage {
     this.driver = driver;
   }
 
-  public PIMPage addNewEmployee(final EmployeeDetails employeeDetails) {
+  public PIMPage addNewEmployeeWithLoginDetails(final EmployeeDetails employeeDetails) {
     pimPageNavComponent.selectNavOptionFromPIMPage(ADD_EMPLOYEE);
     driver.searchElement(FIRST_NAME).typeText(employeeDetails.getFirstName());
     driver.searchElement(MIDDLE_NAME).typeText(employeeDetails.getMiddleName());

@@ -14,7 +14,7 @@ class AddNewEmployeeTests extends WebTestSetup {
     LoginPage.getInstance()
         .loginToApplication()
         .navigateToPimPage()
-        .addNewEmployee(employeeDetails)
+        .addNewEmployeeWithLoginDetails(employeeDetails)
         .verifyEmployeeSuccessfullyCreated();
   }
 }
