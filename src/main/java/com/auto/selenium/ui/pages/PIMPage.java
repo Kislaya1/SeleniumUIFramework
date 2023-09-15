@@ -17,8 +17,7 @@ public class PIMPage {
       By.xpath(".//label[text()='Employee Id']/parent::div/parent::div/div/input");
   private final By IMAGE_BUTTON = By.xpath("//input[@type='file']");
   private final By SAVE_BUTTON =
-      By.xpath(
-          ".//*/text()[contains(normalize-space(translate(string(.), '\t\n\r\u00a0', '    ')), 'Save')]/parent::*");
+      By.xpath(".//p[text()='Create Login Details']/ancestor::form/div[2]/button[2]");
   private final By SUCCESS_MSG =
       By.xpath(
           ".//*/text()[contains(normalize-space(translate(string(.), '\t\n\r\u00a0', '    ')), 'Success')]/parent::*");
@@ -41,13 +40,11 @@ public class PIMPage {
         .searchElement(IMAGE_BUTTON)
         .uploadImage(
             "C:\\Users\\Public\\Documents\\SeleniumUIFramework\\src\\test\\resources\\images\\Google.png");
-    //Check this click
-    driver.searchElements(SAVE_BUTTON).stream().findFirst().orElseThrow().click(USING_ACTION);
+    driver.searchElement(SAVE_BUTTON).click(NORMAL);
     return this;
   }
 
   public void verifyEmployeeSuccessfullyCreated() throws InterruptedException {
-    Thread.sleep(1000000);
-    // driver.searchElements(SUCCESS_MSG).stream().findFirst().orElseThrow().shouldBeVisible();
+    driver.searchElement(SUCCESS_MSG).shouldBeVisible();
   }
 }
