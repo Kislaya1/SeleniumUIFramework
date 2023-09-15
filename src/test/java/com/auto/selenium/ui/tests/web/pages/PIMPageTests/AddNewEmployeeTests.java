@@ -11,7 +11,6 @@ class AddNewEmployeeTests extends WebTestSetup {
   @ParameterizedTest
   @ArgumentsSource(EmployeeTestData.class)
   void addNewEmployee(final EmployeeDetails employeeDetails) {
-    System.out.println("Employee Details : " + employeeDetails);
     LoginPage.getInstance()
         .loginToApplication()
         .navigateToPimPage()
