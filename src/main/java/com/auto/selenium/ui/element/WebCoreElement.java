@@ -56,7 +56,6 @@ public class WebCoreElement implements IWebElement {
   public void uploadImage(final String fileName) {
     Path resourceDirectory = Paths.get("src", "test", "resources");
     String absoluteDirectory = resourceDirectory.toFile().getAbsolutePath();
-    System.out.println("File Path : " + (absoluteDirectory + fileName));
     webElement.sendKeys(absoluteDirectory + fileName);
   }
 

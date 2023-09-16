@@ -11,7 +11,7 @@ public class EmployeeDetailsTemplate implements TemplateLoader {
     @Override
     public void load() {
     Faker faker = new Faker();
-    String randomPassword = faker.internet().password();
+    String randomPassword = faker.internet().password(8, 10, true);
     Fixture.of(EmployeeDetails.class)
         .addTemplate(
             "valid",
